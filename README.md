@@ -13,11 +13,15 @@ Version 0.9.0 introduces model simulations based on DynamicHMC, e.g. the nice ex
 
 A possibility is to completely switch to using to DynamicHMC in version 1.0.0 or use both.
 
+Documentation will also change substantially. I no longer plan to generate and store notebook (and chapter) versions as part of the documentation. If a user is interested to use the notebook versions they can be generated. This also has consequences for testing. 
+
+Figures will be stored in the chapter directories. This is one of the reasons why I am planning this change. I have noticed that the quality of the figures as generated and included by Literate.jl are less than optimal. 
+
 At the same time StanModels will be updated to use the new suite of packages StanSample.jl, StanOptimize.jl, StanVariational.jl, etc. (all modeled after Tamas Papp's StanDump.jl, StanRun.jl and StanSamples.jl).
 
 Towards the end of this year I also plan to update TuringModels.jl based on the new AdvancedHMC option.
 
-At the same time, Chris Fisher has made tremendous progress with MCMCBenchmarks.jl, which compares three NUTS mcmc options.
+At the meantime time, Chris Fisher has made tremendous progress with MCMCBenchmarks.jl, which compares three NUTS mcmc options.
 
 ## Introduction
 
