@@ -3,7 +3,7 @@
 
 The structure of StatisticalRethinking.jl is based on the book [Statistical Rethinking](https://xcelab.net/rm/statistical-rethinking/) by Richard McElreath.
 
-The Julia versions have been derived by Rob Goedman and are contained in the in github organization [StatisticalRethinkingJulia](). 
+The Julia versions have been derived by Rob Goedman and are contained in the in github organization [StatisticalRethinkingJulia](https://github.com/StatisticalRethinkingJulia). 
 
 ## Copyright notice and limited liability
 
@@ -11,7 +11,7 @@ The associated R packages 'rethinking` by Richard McElreath has been released un
 
 ## Permission to publish a Julia version
 
-The author has given permission to publish this Julia version:
+The author has given permission to publish this Julia version and in particular expressed acceptance of repackaging the data examples:
 
 -------------------
 
@@ -24,7 +24,7 @@ I licensed the package under GPL 3+, which I believe allows you to do
 whatever you want. I certainly don't see any issues with repackaging
 the data examples.
 
-...<snipped>
+Really super work, by the way. (Snipped a further personal remark).
 
 Anyway, if you need anything more, please just ask.
 
