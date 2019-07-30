@@ -1,7 +1,8 @@
 # Load Julia packages (libraries) needed
 
 using StatisticalRethinking
-#gr(size=(600,600));
+
+ProjDir = rel_path("..", "scripts", "02")
 
 # ### snippet 2.3
 
@@ -45,5 +46,6 @@ p3 = plot(p_grid, prior1,
 scatter!(p3, p_grid, prior1, lab = "semi_uniform grid point")
 plot!(p3, p_grid, prior2,  lab = "double_exponential" )
 scatter!(p3, p_grid, prior2,  lab = "double_exponential grid point" )
+savefig("$ProjDir/Fig-03-05.pdf")
 
 # End of `02/clip-03-05.jl`

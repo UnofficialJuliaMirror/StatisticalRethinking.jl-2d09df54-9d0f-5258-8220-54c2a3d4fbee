@@ -16,39 +16,27 @@ generate(sd = script_dict)
 None, all notebooks/.. and chapters/.. files are regenerated.
 
 """
-function generate(sd::DataStructures.OrderedDict{AbstractString, Vector{ScriptEntry}} = script_dict)
-  DocDir = rel_path("..", "docs", "src")
-
+function generate(
+  sd::DataStructures.OrderedDict{AbstractString, Vector{ScriptEntry}} = script_dict;
+  NotebookDir = mktempdir())
+  
+  println("\nNotebookDir is at $(NotebookDir)\n")
   for chapter in keys(sd)
     ProjDir = rel_path("..", "scripts", chapter)
-
-    ChapterDir = rel_path("..", "chapters")
-    !isdir(ChapterDir) && mkdir(ChapterDir)  
-    ChapterDir = rel_path("..", "chapters", "$(chapter)")
     ScriptsDir = rel_path("..", "scripts", "$(chapter)")
-
-    NotebookDir = rel_path("..", "notebooks")
-    !isdir(NotebookDir) && mkdir(NotebookDir)  
-    NotebookDir = rel_path("..", "notebooks", "$(chapter)")
-  
-    !isdir(ProjDir) && break
+    NbDir = joinpath(NotebookDir, "$(chapter)")
+    !isdir(NbDir) && mkdir(NbDir)  
   
     cd(ProjDir) do
       for script in sd[chapter]
         file = script.scriptfile
       
-        # Generate chapters
-      
-        isfile(joinpath(ChapterDir, file[1:end-3], ".jl")) && 
-          rm(joinpath(ChapterDir, file[1:end-3], ".jl"))          
-        Literate.script(file, ChapterDir)
-      
         # Generate notebooks
       
         if script.nb && isfile(file)
-          isfile(joinpath(NotebookDir, file[1:end-3], ".ipynb")) && 
-            rm(joinpath(NotebookDir, file[1:end-3], ".ipynb"))          
-          Literate.notebook(file, NotebookDir, execute=script.exe)
+          isfile(joinpath(NbDir, file[1:end-3], ".ipynb")) && 
+            rm(joinpath(NbDir, file[1:end-3], ".ipynb"))          
+          Literate.notebook(file, NbDir, execute=script.exe)
         end
       end
     
@@ -78,22 +66,19 @@ generate(chapter::AbstractString)
 Generate notebooks and scripts in a single chapter, e.g. generate("04")
 
 """
-function generate(chapter::AbstractString; sd=script_dict)
+function generate(chapter::AbstractString; sd=script_dict,
+  NotebookDir = mktempdir())
+
+  println("\nNotebookDir is at $(NotebookDir)\n")
   split_chapter = split(chapter, "/")
   if length(split_chapter) == 2
     generate(split_chapter...)
   else
-    DocDir = rel_path("..", "docs", "src")
     ProjDir = rel_path("..", "scripts", chapter)
-
-    ChapterDir = rel_path("..", "chapters")
-    !isdir(ChapterDir) && mkdir(ChapterDir)  
-    ChapterDir = rel_path("..", "chapters", "$(chapter)")
     ScriptsDir = rel_path("..", "scripts", "$(chapter)")
 
-    NotebookDir = rel_path("..", "notebooks")
-    !isdir(NotebookDir) && mkdir(NotebookDir)  
-    NotebookDir = rel_path("..", "notebooks", "$(chapter)")
+    NbDir = joinpath(NotebookDir, "$(chapter)")
+    !isdir(NbDir) && mkdir(NbDir)  
 
     if isdir(ProjDir)
 
@@ -101,18 +86,12 @@ function generate(chapter::AbstractString; sd=script_dict)
         for script in sd[chapter]
           file = script.scriptfile
     
-          # Generate chapters
-    
-          isfile(joinpath(ChapterDir, file[1:end-3], ".jl")) && 
-            rm(joinpath(ChapterDir, file[1:end-3], ".jl"))          
-          Literate.script(file, ChapterDir)
-    
-          # Generate notebooks
+         # Generate notebooks
     
           if script.nb && isfile(file)
-            isfile(joinpath(NotebookDir, file[1:end-3], ".ipynb")) && 
-              rm(joinpath(NotebookDir, file[1:end-3], ".ipynb"))          
-            Literate.notebook(file, NotebookDir, execute=script.exe)
+            isfile(joinpath(NbDir, file[1:end-3], ".ipynb")) && 
+              rm(joinpath(NbDir, file[1:end-3], ".ipynb"))          
+            Literate.notebook(file, NbDir, execute=script.exe)
           end
         end
   
@@ -144,18 +123,14 @@ Generate notebook and script `file` in `chapter`, e.g. generate("04", "m4.1d.jl"
 or  generate("04/m4.1d.jl")
 
 """
-function generate(chapter::AbstractString, scriptfile::AbstractString; sd=script_dict)
-  DocDir = rel_path("..", "docs", "src")
+function generate(chapter::AbstractString, scriptfile::AbstractString; sd=script_dict,
+  NotebookDir = mktempdir())
+
+  println("\nNotebookDir is at $(NotebookDir)\n")
   ProjDir = rel_path("..", "scripts", chapter)
-
-  ChapterDir = rel_path("..", "chapters")
-  !isdir(ChapterDir) && mkdir(ChapterDir)  
-  ChapterDir = rel_path("..", "chapters", "$(chapter)")
   ScriptsDir = rel_path("..", "scripts", "$(chapter)")
-
-  NotebookDir = rel_path("..", "notebooks")
-  !isdir(NotebookDir) && mkdir(NotebookDir)  
-  NotebookDir = rel_path("..", "notebooks", "$(chapter)")
+  NbDir = joinpath(NotebookDir, "$(chapter)")
+  !isdir(NbDir) && mkdir(NbDir)  
 
   if isdir(ProjDir)
 
@@ -164,18 +139,12 @@ function generate(chapter::AbstractString, scriptfile::AbstractString; sd=script
         !(script.scriptfile == scriptfile) && continue
         file = script.scriptfile
     
-        # Generate chapters
-    
-        isfile(joinpath(ChapterDir, file[1:end-3], ".jl")) && 
-          rm(joinpath(ChapterDir, file[1:end-3], ".jl"))          
-        Literate.script(file, ChapterDir)
-    
         # Generate notebooks
     
         if script.nb && isfile(file)
-          isfile(joinpath(NotebookDir, file[1:end-3], ".ipynb")) && 
-            rm(joinpath(NotebookDir, file[1:end-3], ".ipynb"))          
-          Literate.notebook(file, NotebookDir, execute=script.exe)
+          isfile(joinpath(NbDir, file[1:end-3], ".ipynb")) && 
+            rm(joinpath(NbDir, file[1:end-3], ".ipynb"))          
+          Literate.notebook(file, NbDir, execute=script.exe)
         end
       end
   

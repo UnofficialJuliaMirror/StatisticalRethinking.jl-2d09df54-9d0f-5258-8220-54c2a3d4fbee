@@ -2,6 +2,8 @@
 
 using StatisticalRethinking
 
+cd(@__DIR__) do
+  
 # ### snippet 2.8
 
 # Simple Metropolis algorithm
@@ -36,11 +38,15 @@ MCMCChains.describe(chns)
 # Plot the chain
 
 plot(chns)
+savefig("Fig-08.1.pdf")
 
 # Show density and computed conjugate solution
 
 w = 6; n = 9; x = 0:0.01:1
 density(chns, lab="Samples")
 plot!( x, pdf.(Beta( w+1 , n-w+1 ) , x ), lab="Conjugate solution")
+savefig("Fig-08.2.pdf")
+
+end
 
 # End of `02/clip-08.jl`
