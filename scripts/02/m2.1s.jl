@@ -6,7 +6,6 @@ using StatisticalRethinking, CmdStan
 # CmdStan uses a tmp directory to store the output of cmdstan
 
 ProjDir = rel_path("..", "scripts", "02")
-cd(ProjDir)
 
 # Define the Stan language model
 
@@ -33,8 +32,7 @@ model {
 
 # Define the Stanmodel and set the output format to :mcmcchains.
 
-stanmodel = Stanmodel(name="binomial", monitors = ["theta"], model=binomialstanmodel,
-  output_format=:mcmcchains);
+stanmodel = Stanmodel(name="binomial", model=binomialstanmodel);
 
 # Use 16 observations
 
@@ -85,7 +83,7 @@ if rc == 0
     plot!(p[i], x, pdf.(Normal(fits[i].μ, fits[i].σ), x), lab="Fitted Normal($μ, $σ)")
   end
   plot(p..., layout=(4, 1))
-  savefig("Fig-m2.1s.pdf")
+  savefig("$ProjDir/fig-m2.1s.pdf")
 end
 
 # Show the hpd region
@@ -106,7 +104,7 @@ println("hpd bounds = $bnds\n")
 
 # Compute MAP, compare with CmndStan & MLE
 
-tmp = convert(Array{Float64,3}, chn.value)
+tmp = convert(Array{Float64,3}, chn[:theta].value)
 draws = reshape(tmp, (size(tmp, 1)*size(tmp, 3)),)
 
 # Compute MAP
@@ -151,6 +149,6 @@ lab="Normal approximation using MAP")
 density!(draws, lab="CmdStan chain")
 vline!([bnds[1]], line=:dash, lab="hpd lower bound")
 vline!([bnds[2]], line=:dash, lab="hpd upper bound")
-savefig("Fig-m2.1.pdf")
+savefig("$ProjDir/fig-m2.1.pdf")
 
 # End of `02/clip_08s.jl`

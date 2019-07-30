@@ -2,7 +2,8 @@
 
 using StatisticalRethinking, Optim
 
-cd(@__DIR__) do
+ProjDir = rel_path("..", "scripts", "02")
+
 
 # ### snippet 2.6
 
@@ -45,7 +46,7 @@ MCMCChains.describe(chn)
 # Plot the chain
 
 plot(chn)
-savefig("Fig-06-07.1.pdf")
+savefig("$ProjDir/fig-06-07.1.pdf")
 
 # Compute the MAP (maximum_a_posteriori) estimate
 
@@ -92,7 +93,6 @@ w = 6; n = 9; x = 0:0.01:1
 p[4] = plot( x, pdf.(Beta( w+1 , n-w+1 ) , x ), lab="Conjugate solution")
 plot!(p[4], x, pdf.(Normal( 0.67 , 0.16 ) , x ), lab="Normal approximation")
 plot(p..., layout=(2, 2))
-savefig("Fig-06-07.2.pdf")
-end
+savefig("$ProjDir/fig-06-07.2.pdf")
 
 # End of `02/clip-06-07.jl`

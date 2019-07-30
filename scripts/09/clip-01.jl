@@ -1,9 +1,8 @@
 # `clip-01`
 
 using StatisticalRethinking
-#gr(size=(600,600));
 
-ProjDir = @__DIR__
+ProjDir = rel_path("..", "scripts", "09")
 
 # ### snippet 9.1
 
@@ -40,5 +39,7 @@ p[1] = plot(walk[1:100], leg=false, xlabel="Week", ylabel="Island", title="First
 p[2] = histogram(walk, leg=false, xlabel="Island", ylabel="Number of weeks",
   title="$N steps")
 plot(p..., layout=(1, 2))
+savefig("$ProjDir/fig-01.pdf")
+
 
 # End of `clip-01.jl`
