@@ -11,18 +11,18 @@ Over the next 2 months I'm planning to update StatisticalRethinking.jl to reflec
 
 Version 0.9.0 introduced model simulations based on DynamicHMC, e.g. the nice explanation of HMC (and NUTS) in chapter 9.
 
-In version 1.0 I plan to switch to predominantly use DynamicHMC but I'm still experimenting with a useful replacement for quap().
+In version 1.0 I plan to switch to predominantly use DynamicHMC but
+I'm still experimenting with a useful replacement for quap().
 
-StanModels will be updated to use the new suite of packages StanSample.jl, StanOptimize.jl, StanVariational.jl, etc. (all modeled after Tamas Papp's StanDump.jl, StanRun.jl and StanSamples.jl).
+StanModels will be updated to use the new suite of packages StanSample.jl, StanOptimize.jl, StanVariational.jl, etc. (all modeled after Tamas Papp's StanDump.jl, StanRun.jl and StanSamples.jl). 
 
-Documentation will also change substantially. I no longer plan to generate and store notebook (and chapter) versions as part of the documentation. If a user is interested to use the notebook versions they can be generated. This also has consequences for testing.
+Documentation will also change substantially. I no longer plan to generate and store notebook (and chapter) versions as part of the documentation. If a user is interested to use the notebook versions they can be generated. This also has consequences for testing. 
 
-Figures will be stored in the chapter directories. This is one of the reasons why I am planning this change. I have noticed that the quality of the figures as generated and included by Literate.jl are less than optimal.
+Figures will be stored in the chapter directories. This is one of the reasons why I am planning this change. I have noticed that the quality of the figures as generated and included by Literate.jl are less than optimal. 
 
 Towards the end of this year I also plan to update TuringModels.jl based on the new AdvancedHMC option.
 
-In the meantime time, Chris Fisher has made tremendous progress with MCMCBenchmarks.jl, which compares three NUTS mcmc options.
-
+At the meantime time, Chris Fisher has made tremendous progress with MCMCBenchmarks.jl, which compares three NUTS mcmc options.
 
 ## Introduction
 
