@@ -15,7 +15,7 @@ append!(page_list, [Pair("Functions", "index.md")])
 makedocs(root = DOC_ROOT,
     modules = Module[],
     sitename = "StatisticalRethinking.jl",
-    authors = "Rob Goedman, Richard Torkar, and contributors.",
+    authors = "Rob Goedman and contributors.",
     pages = page_list
 )
 
