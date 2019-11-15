@@ -31,21 +31,14 @@ rel_path("..", "data")
 rel_path(parts...) = normpath(joinpath(src_path, parts...))
 
 include("link.jl")
-include("quap.jl")
 include("sampling.jl")
 include("scale.jl")
 include("shading.jl")
-include("HMC.jl")
 include("generate_n_samples.jl")
 
 export
   rel_path,
-  ScriptEntry,
-  scriptentry,
-  script_dict,
-  generate,
-  quap,
-  link,
+ link,
   describe,
   #shade,
   scale,
